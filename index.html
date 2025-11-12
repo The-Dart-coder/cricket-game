@@ -31,6 +31,13 @@ body{
   ">stump</button> 
 
   <script>
+let score ={
+  win: 0,
+  lost: 0,
+  tie : 0,
+};
+
+
 function generateComputerChoice(){
   //this will generate random numb er between 0 and 3
     let randomNumber = Math.random() * 3; 
@@ -48,10 +55,13 @@ function getResult( userMove , computerMove){
 if (userMove === 'Bat'){
 
    if ( computerMove === 'Ball'){
+    score.win++;
     return 'User won';
    }else if ( computerMove === 'Bat'){
+     score.tie++;
     return `it's a tie `;
    }else if ( computerMove === 'Stump'){
+     score.lost++;
     return 'Computer won';
    }
   
@@ -59,10 +69,13 @@ if (userMove === 'Bat'){
 }else if (userMove === 'Ball') {
 
 if ( computerMove === 'Ball'){
+    score.tie++;
     return  `it's a tie `;
    }else if ( computerMove === 'Bat'){
+    score.lost++;
     return 'Computer won';
    }else if ( computerMove === 'Stump'){
+    score.win++;
     return 'User won';
    }
 
@@ -70,16 +83,24 @@ if ( computerMove === 'Ball'){
 }else{
 
  if ( computerMove === 'Ball'){
+  score.lost++;
     return  'Computer won';
    }else if ( computerMove === 'Bat'){
+    score.win++;
     return 'User won';
    }else if ( computerMove === 'Stump'){
+    score.tie++;
     return `it's a tie `;
    }
 }  
 }
  function showResult( userMove, computerMove, result){
-  alert(`you have chosen Ball ${userMove}. computer choice is ${computerMove} and ${result}`);
+  console.log(score);
+  alert(`you have chosen Ball ${userMove}. computer choice is ${computerMove} and
+  
+  ${result} 
+  
+  Won:${score.win} Lost:${score.lost} tie:${score.tie} `);
  }
   </script>
 </body>
