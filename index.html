@@ -3,35 +3,41 @@
 <head>
 
   <title>Cricket</title>
-  <style>
-body{
-  text-align: center;
-}
-
-  </style>
+  <link rel="stylesheet" href="cricket.css">
 </head>
 <body>
   <h1>Bat Ball Stump  Game</h1>
-  <button onclick="
+
+
+
+
+  <button  class="choiceButton" onclick="
    let computerChoice = generateComputerChoice();
    let resultMsg = getResult('Bat', computerChoice);
    showResult('Bat',computerChoice,resultMsg);
-  ">Bat</button>
+  "><img src="image/bat.png" alt="bat image" class="choiceImage">
+  </button>
 
-   <button onclick="
+   <button class="choiceButton"  onclick="
    computerChoice = generateComputerChoice();
    resultMsg= getResult('Ball', computerChoice);
   showResult('Ball',computerChoice,resultMsg);
-  ">ball</button>
+  "><img src="image/ball.png" alt="ball image" class="choiceImage"></button>
 
-  <button onclick="
+  <button class="choiceButton"  onclick="
   computerChoice = generateComputerChoice();
   resultMsg= getResult('Stump', computerChoice);
   showResult('Stump',computerChoice,resultMsg); 
-  ">stump</button> 
+  "><img src="image/stump.png" alt="stump image" class="choiceImage"></button> 
 
 
-<button onclick="localStorage.clear()
+
+
+<h3 id="userMove"></h3>
+<h3 id="computerMove"></h3>
+<h3 id="result"></h3>
+<h3 id="score"></h3>
+<button id="resetButton" onclick="localStorage.clear()
     resetScore();
 "> Reset</button>
 
@@ -48,8 +54,9 @@ body{
        };
 
 score.displayScore = function(){
-   return` No of Matches  Won:${score.win} Lost:${score.lost} tie:${score.tie}`;
-}
+   return` Score: Won:${score.win} Lost:${score.lost} tie:${score.tie}`;
+};
+showResult();
     }
 
 function generateComputerChoice(){
@@ -62,6 +69,7 @@ function generateComputerChoice(){
       }else{
        return 'Stump';
       }
+
 }
 
 function getResult( userMove , computerMove){
@@ -109,8 +117,20 @@ if ( computerMove === 'Ball'){
 }  
 }
  function showResult( userMove, computerMove, result){
-localStorage.setItem('score', JSON.stringify(score));
-  alert(`you have chosen Ball ${userMove}. computer choice is ${computerMove} and
+  localStorage.setItem('score', JSON.stringify(score));
+
+  document.querySelector('#userMove').innerText = userMove  ? `You have chosen  ${userMove}`: '';
+
+
+  document.querySelector('#computerMove').innerText = computerMove ?`Computer choice is  ${computerMove}` : '';
+
+
+  document.querySelector('#result').innerText = result  || '' ;
+
+
+  document.querySelector('#score').innerText = score.displayScore();
+
+  alert(`You have chosen  ${userMove}. Computer choice is ${computerMove} and
   
   ${result} 
   
